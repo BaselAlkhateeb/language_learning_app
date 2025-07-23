@@ -3,15 +3,20 @@
 
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:language_learning_app/myModels/family_member_model.dart';
+import 'package:language_learning_app/myModels/itemModel.dart';
 import 'package:language_learning_app/myModels/numberModel.dart';
 
 
 class MyNumberContainer extends StatelessWidget {
    const MyNumberContainer({
     required this.obj ,
+    required this.color,
     super.key,
   });
-final Number obj;
+final  Item obj;
+final Color color;
+
   
 Future<void> _playSound() async {
     final player = AudioPlayer(); // مؤقت
@@ -30,17 +35,22 @@ Future<void> _playSound() async {
     return Container(
       height: 80,
     
-      color: Colors.purple,
+      color: color,
       width: MediaQuery.sizeOf(context).width,
       child: Row(
         children: [
           Container(
             decoration: BoxDecoration(
               gradient: RadialGradient(
-                colors: [Colors.pink, Colors.purple],
+                colors: [Colors.pink, color],
               ),
             ),
-            child: Image.asset(obj.imagePath),
+            
+            
+            child:
+            obj.imagePath != null && obj.imagePath!.isNotEmpty
+  ? Image.asset(obj.imagePath!)
+  : const SizedBox(),
           ),
           VerticalDivider(color: Colors.white, thickness: 1),
          
